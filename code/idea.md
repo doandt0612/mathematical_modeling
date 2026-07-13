@@ -114,7 +114,8 @@ $$
 i^* = \begin{cases}
 \displaystyle\arg\max_{i \in \text{candidates}_{\text{active}}} \text{Score}(i) & \text{nếu } \text{candidates}_{\text{active}} \neq \emptyset \\[2mm]
 \displaystyle\arg\min_{i \in \text{candidates}} \text{Wait}_i & \text{nếu } \text{candidates}_{\text{active}} = \emptyset
-\end{cases} \tag{18}$$
+\end{cases} \tag{18}
+$$
 
 **Quy tắc phá vỡ thế hòa (tie-breaking):**
 
@@ -138,7 +139,7 @@ $$\text{Score}(i) = w_1 \cdot g_i + w_2 \cdot h_i + w_3 \cdot p_i, \qquad w_1+w_
 
 **Tách tập holdout để đánh giá (không phải "train" theo nghĩa học máy):**
 
-$$\text{val} = \text{holdout\_sample}(\text{customers},\ n_{\text{val}}) \tag{20}$$
+$$\text{val} = \text{holdout_sample}(\text{customers},\ n_{\text{val}}) \tag{20}$$
 
 $$n_{\text{val}} = \max\big(n_{\min},\ \lceil \gamma \cdot n \rceil\big) \tag{20'}$$
 
@@ -154,12 +155,12 @@ $$\delta, \lambda \in \{0.01,\ 0.03,\ 0.05,\ 0.1\}, \qquad \tau \in \{30, 60, 90
 
 **Hàm mục tiêu (Objective) — đã bao gồm chuẩn hóa nhất quán với Cost(σ):**
 
-$$\text{Objective}(\delta,\lambda,\tau) = M \cdot |\text{Unfulfilled}(\delta,\lambda,\tau)| \;+\; \alpha \cdot \frac{\text{Dist}_{\text{week}}(\delta,\lambda,\tau)}{\text{REF\_DIST}} \;+\; \beta \cdot \frac{\text{Wait}_{\text{week}}(\delta,\lambda,\tau)}{\text{REF\_WAIT}} \tag{21'}$$
+$$\text{Objective}(\delta,\lambda,\tau) = M \cdot |\text{Unfulfilled}(\delta,\lambda,\tau)| \;+\; \alpha \cdot \frac{\text{Dist}_{\text{week}}(\delta,\lambda,\tau)}{\text{REF_DIST}} \;+\; \beta \cdot \frac{\text{Wait}_{\text{week}}(\delta,\lambda,\tau)}{\text{REF_WAIT}} \tag{21'}$$
 
 trong đó:
 - $M$: hằng số phạt rất lớn (vd $M = 10000$), đảm bảo **không đơn hàng nào bị hy sinh chỉ để giảm quãng đường** — giữ đúng thứ tự ưu tiên đã đề xuất ở công thức (19)
 - $\alpha, \beta$: **dùng lại đúng trọng số** đã định nghĩa ở công thức (29)
-- $\text{REF\_DIST}, \text{REF\_WAIT}$: **hằng số chuẩn hóa giống hệt** dùng trong  Local Search (Phần 7) — bắt buộc phải nhất quán, nếu không Grid Search sẽ tối ưu một hàm mục tiêu khác với hàm mà Local Search thực sự tối thiểu hóa, dẫn đến chọn sai tham số khi độ lớn của Dist và Wait lệch nhau đáng kể
+- $\text{REF_DIST}, \text{REF_WAIT}$: **hằng số chuẩn hóa giống hệt** dùng trong  Local Search (Phần 7) — bắt buộc phải nhất quán, nếu không Grid Search sẽ tối ưu một hàm mục tiêu khác với hàm mà Local Search thực sự tối thiểu hóa, dẫn đến chọn sai tham số khi độ lớn của Dist và Wait lệch nhau đáng kể
 - $\text{Dist}_{\text{week}}, \text{Wait}_{\text{week}}$: tính theo công thức (32), (33), **sau khi đã áp dụng Local Search** (không phải route thô ban đầu)
 
 **Chọn tham số tối ưu:**
@@ -212,9 +213,9 @@ $$\text{TotalWait}(\sigma) = \sum_{p=1}^{k} \text{Wait}_{\sigma_p} \tag{28}$$
 
 **Hàm chi phí tổng hợp (đã chuẩn hóa bằng hằng số tham chiếu):**
 
-$$\text{Cost}(\sigma) = \alpha \cdot \frac{\text{Dist}(\sigma)}{\text{REF\_DIST}} + \beta \cdot \frac{\text{TotalWait}(\sigma)}{\text{REF\_WAIT}} \tag{29}$$
+$$\text{Cost}(\sigma) = \alpha \cdot \frac{\text{Dist}(\sigma)}{\text{REF_DIST}} + \beta \cdot \frac{\text{TotalWait}(\sigma)}{\text{REF_WAIT}} \tag{29}$$
 
-trong đó $\text{REF\_DIST}, \text{REF\_WAIT}$ là 2 hằng số chuẩn hóa cố định (vd $100$ km và $200$ phút) — **cùng giá trị phải được dùng lại ở công thức (21') của Phần 5** để đảm bảo tính nhất quán giữa bước hiệu chỉnh tham số và bước tối ưu route thực tế.
+trong đó $\text{REF_DIST}, \text{REF_WAIT}$ là 2 hằng số chuẩn hóa cố định (vd $100$ km và $200$ phút) — **cùng giá trị phải được dùng lại ở công thức (21') của Phần 5** để đảm bảo tính nhất quán giữa bước hiệu chỉnh tham số và bước tối ưu route thực tế.
 
 **Điều kiện chấp nhận 1 phép biến đổi (Or-opt / 2-opt / swap) trong local search:**
 
